@@ -4,7 +4,7 @@ import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 
 type EditorActionsProps = {
 	handleSave: () => void;
-	isSaveNeeded: Boolean;
+	isSaveNeeded: boolean;
 };
 
 export function EditorActions({ handleSave, isSaveNeeded }: EditorActionsProps) {

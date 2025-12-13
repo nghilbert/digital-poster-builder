@@ -15,7 +15,7 @@ export function ComponentMenu() {
 				variant="outlined"
 				size="small"
 				ref={(ref: HTMLButtonElement | null) => {
-					ref && connectors.create(ref, <Element is={Component} canvas={Component.craft.isCanvas || false} />);
+					if (ref) connectors.create(ref, <Element is={Component} canvas={Component.craft.isCanvas || false} />);
 				}}
 			>
 				{Component.craft.displayName || "User Component"}
