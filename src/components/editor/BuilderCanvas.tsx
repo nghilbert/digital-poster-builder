@@ -1,38 +1,33 @@
-import { useState } from "react";
+import "react-resizable/css/styles.css";
 import { ResizableBox } from "react-resizable";
 import { Element, Frame } from "@craftjs/core";
 import { Paper } from "@mui/material";
-import { Container } from "components/user/Container";
-import "react-resizable/css/styles.css";
+import { userComponents } from "components/user";
 
 export function BuilderCanvas() {
-	// Starting size. Dynamically updates when resized.
-	const [size, setSize] = useState({ width: 1024, height: 600 });
+	const { RootBox } = userComponents;
 
 	return (
 		<ResizableBox
-			width={size.width}
-			height={size.height}
+			width={1024}
+			height={600}
 			minConstraints={[320, 400]}
 			maxConstraints={[1200, 1200]}
 			resizeHandles={["se", "e", "s", "sw", "w"]}
-			onResizeStop={(_, data) => {
-				setSize({ width: data.size.width, height: data.size.height });
-			}}
+			handleSize={[20, 20]}
 		>
 			<Paper
 				elevation={3}
 				sx={{
+					p: 1,
 					width: "100%",
 					height: "100%",
-					overflow: "auto",
-					p: 3,
+					position: "relative",
 					boxSizing: "border-box",
-					backgroundColor: "white",
 				}}
 			>
 				<Frame>
-					<Element canvas is={Container} />
+					<Element canvas is={RootBox} />
 				</Frame>
 			</Paper>
 		</ResizableBox>

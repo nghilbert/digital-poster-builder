@@ -1,13 +1,13 @@
 import { Element, useEditor } from "@craftjs/core";
 import { Button as MUIButton, Typography, Stack } from "@mui/material";
-import * as userComponents from "components/user";
+import { userComponents } from "components/user";
 
 export function ComponentMenu() {
 	const { connectors } = useEditor();
 
-	const menuButtons = Object.keys(userComponents).map((key) => {
-		// @ts-ignore for now...
-		const Component = userComponents[key];
+	const menuButtons = Object.entries(userComponents).map(([key, Component]) => {
+		if (!Component.craft) return null;
+		if (!Component.craft.rules.canDrag()) return null;
 
 		return (
 			<MUIButton
@@ -22,8 +22,9 @@ export function ComponentMenu() {
 			</MUIButton>
 		);
 	});
+
 	return (
-		<Stack spacing={1}>
+		<Stack spacing={2}>
 			<Typography align="center">Drag to add</Typography>
 			{menuButtons}
 		</Stack>

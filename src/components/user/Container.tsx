@@ -1,6 +1,6 @@
-import type { PropsWithChildren } from "react";
 import { useNode } from "@craftjs/core";
 import { Container as MUIContainer } from "@mui/material";
+import type { PropsWithChildren } from "react";
 
 export function Container({ children }: PropsWithChildren) {
 	const {
@@ -12,7 +12,6 @@ export function Container({ children }: PropsWithChildren) {
 			ref={(ref: HTMLElement | null) => {
 				if (ref) connect(drag(ref));
 			}}
-			sx={{ minHeight: "100px" }}
 		>
 			{children}
 		</MUIContainer>
@@ -23,8 +22,10 @@ Container.craft = {
 	displayName: "Container",
 	props: { children: [] },
 	rules: {
-		canDrag: () => false,
+		canDrop: () => true,
+		canDrag: () => true,
 		canMoveIn: () => true,
+		canMoveOut: () => true,
 	},
 	isCanvas: true,
 };

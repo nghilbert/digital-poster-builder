@@ -3,11 +3,10 @@ import { Editor } from "@craftjs/core";
 import { Layers } from "@craftjs/layers";
 
 import { BuilderCanvas, ComponentMenu, SidePanel, SettingsMenu, EditorActions } from "components/editor";
-import * as userComponents from "components/user";
+import { userComponents } from "components/user";
 import { Box } from "@mui/material";
 
 export default function Home() {
-	const resolverComponents = { ...userComponents };
 	const [isSaveNeeded, setIsSaveNeeded] = useState(false);
 
 	function handleSave() {
@@ -22,16 +21,16 @@ export default function Home() {
 	return (
 		<Box
 			sx={{
+				minHeight: "100vh",
+				width: "100%",
 				display: "flex",
 				justifyContent: "space-between",
-				width: "100%",
-				height: "100vh",
 			}}
 		>
 			{
 				// Conditionally render the Editor once the layout is readyevery
 
-				<Editor onNodesChange={handleNodesChange} resolver={resolverComponents}>
+				<Editor onNodesChange={handleNodesChange} resolver={userComponents}>
 					<SidePanel>
 						<EditorActions handleSave={handleSave} isSaveNeeded={isSaveNeeded} />
 						<ComponentMenu />
