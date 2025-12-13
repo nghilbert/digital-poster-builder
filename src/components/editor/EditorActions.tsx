@@ -7,7 +7,7 @@ type EditorActionsProps = {
 	isSaveNeeded: Boolean;
 };
 
-export default function EditorActions({ handleSave, isSaveNeeded }: EditorActionsProps) {
+export function EditorActions({ handleSave, isSaveNeeded }: EditorActionsProps) {
 	return (
 		<Stack direction="row">
 			<IconButton onClick={handleSave}>{isSaveNeeded ? <SaveOutlinedIcon /> : <SaveIcon />}</IconButton>

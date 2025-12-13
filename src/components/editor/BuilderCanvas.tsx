@@ -2,10 +2,10 @@ import { useState } from "react";
 import { ResizableBox } from "react-resizable";
 import { Element, Frame } from "@craftjs/core";
 import { Paper } from "@mui/material";
-import { Container } from "../user/Container";
+import { Container } from "components/user/Container";
 import "react-resizable/css/styles.css";
 
-export default function BuilderCanvas() {
+export function BuilderCanvas() {
 	// Starting size. Dynamically updates when resized.
 	const [size, setSize] = useState({ width: 1024, height: 600 });
 

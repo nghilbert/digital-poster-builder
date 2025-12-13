@@ -1,29 +1,28 @@
 import type { PropsWithChildren } from "react";
 import { useNode } from "@craftjs/core";
-import { Container as MUIContainer } from "@mui/material";
+import { Box as MUIBox } from "@mui/material";
 
-export function Container({ children }: PropsWithChildren) {
+export function Box({ children }: PropsWithChildren) {
 	const {
 		connectors: { connect, drag },
 	} = useNode();
 
 	return (
-		<MUIContainer
+		<MUIBox
 			ref={(ref: HTMLElement | null) => {
 				if (ref) connect(drag(ref));
 			}}
-			sx={{ minHeight: "100px" }}
 		>
 			{children}
-		</MUIContainer>
+		</MUIBox>
 	);
 }
 
-Container.craft = {
-	displayName: "Container",
+Box.craft = {
+	displayName: "Box",
 	props: { children: [] },
 	rules: {
-		canDrag: () => false,
+		canDrag: () => true,
 		canMoveIn: () => true,
 	},
 	isCanvas: true,

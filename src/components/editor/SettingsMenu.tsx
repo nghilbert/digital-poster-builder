@@ -2,7 +2,7 @@ import { useEditor } from "@craftjs/core";
 import { Button as MUIButton, Stack, Typography } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
-export default function SettingsMenu() {
+export function SettingsMenu() {
 	const { actions, selected } = useEditor((state, query) => {
 		const [currentNodeId] = state.events.selected;
 		let selected;

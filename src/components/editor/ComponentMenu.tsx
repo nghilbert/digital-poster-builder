@@ -1,25 +1,31 @@
 import { Element, useEditor } from "@craftjs/core";
 import { Button as MUIButton, Typography, Stack } from "@mui/material";
-import { Container } from "components/user";
+import * as userComponents from "components/user";
 
-export default function ComponentMenu() {
+export function ComponentMenu() {
 	const { connectors } = useEditor();
 
-	const userComponents = [{ label: "Container", component: <Element is={Container} canvas /> }];
+	const menuButtons = Object.keys(userComponents).map((key) => {
+		// @ts-ignore for now...
+		const Component = userComponents[key];
 
+		return (
+			<MUIButton
+				key={key}
+				variant="outlined"
+				size="small"
+				ref={(ref: HTMLButtonElement | null) => {
+					ref && connectors.create(ref, <Element is={Component} canvas={Component.craft.isCanvas || false} />);
+				}}
+			>
+				{Component.craft.displayName || "User Component"}
+			</MUIButton>
+		);
+	});
 	return (
 		<Stack spacing={1}>
 			<Typography align="center">Drag to add</Typography>
-			{userComponents.map(({ label, component }) => (
-				<MUIButton
-					key={label}
-					ref={(ref: HTMLButtonElement | null) => {
-						ref && connectors.create(ref, component);
-					}}
-				>
-					{label}
-				</MUIButton>
-			))}
+			{menuButtons}
 		</Stack>
 	);
 }

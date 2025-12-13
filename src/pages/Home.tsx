@@ -1,17 +1,14 @@
-import React from "react";
+import { useState } from "react";
 import { Editor } from "@craftjs/core";
 import { Layers } from "@craftjs/layers";
 
-import BuilderCanvas from "components/editor/BuilderCanvas";
-import ComponentMenu from "components/editor/ComponentMenu";
-import SidePanel from "components/editor/SidePanel";
-import SettingsMenu from "components/editor/SettingsMenu";
-import EditorActions from "components/editor/EditorActions";
+import { BuilderCanvas, ComponentMenu, SidePanel, SettingsMenu, EditorActions } from "components/editor";
 import * as userComponents from "components/user";
 import { Box } from "@mui/material";
 
 export default function Home() {
-	const [isSaveNeeded, setIsSaveNeeded] = React.useState(false);
+	const resolverComponents = { ...userComponents };
+	const [isSaveNeeded, setIsSaveNeeded] = useState(false);
 
 	function handleSave() {
 		setIsSaveNeeded(false);
@@ -34,7 +31,7 @@ export default function Home() {
 			{
 				// Conditionally render the Editor once the layout is readyevery
 
-				<Editor onNodesChange={handleNodesChange} resolver={userComponents}>
+				<Editor onNodesChange={handleNodesChange} resolver={resolverComponents}>
 					<SidePanel>
 						<EditorActions handleSave={handleSave} isSaveNeeded={isSaveNeeded} />
 						<ComponentMenu />
