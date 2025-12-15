@@ -4,7 +4,7 @@ import { ComponentsMenu, EditorMenu } from "components/editor";
 export function SidePanel() {
 	return (
 		<Paper elevation={3} sx={{ width: 360, height: "100%", display: "flex", flexDirection: "column" }}>
-			<Box sx={{ resize: "vertical", overflow: "auto", minHeight: "25%", maxHeight: "75%", p: 1 }}>
+			<Box sx={{ resize: "vertical", overflow: "auto", minHeight: "25%", height: "75%", p: 1 }}>
 				<EditorMenu />
 			</Box>
 			<Divider />

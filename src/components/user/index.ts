@@ -1,9 +1,7 @@
 import { RootBox } from "./RootBox";
-import { Container } from "./Container";
-import { Stack } from "./Stack";
+import { Grid } from "./Grid";
 
 export const userComponents = {
 	RootBox,
-	Container,
-	Stack,
+	Grid,
 };

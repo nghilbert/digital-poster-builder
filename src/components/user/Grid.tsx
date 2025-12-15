@@ -1,25 +1,30 @@
 import { useNode } from "@craftjs/core";
-import { Container as MUIContainer } from "@mui/material";
+import { Grid as MUIGrid } from "@mui/material";
 import type { PropsWithChildren } from "react";
 
-export function Container({ children }: PropsWithChildren) {
+export function Grid({ children }: PropsWithChildren) {
 	const {
 		connectors: { connect, drag },
 	} = useNode();
 
 	return (
-		<MUIContainer
+		<MUIGrid
 			ref={(ref: HTMLElement | null) => {
 				if (ref) connect(drag(ref));
 			}}
 		>
 			{children}
-		</MUIContainer>
+		</MUIGrid>
 	);
 }
 
-Container.craft = {
-	displayName: "Container",
+function GridSettings() {
+	useNode();
+	return null;
+}
+
+Grid.craft = {
+	displayName: "Grid",
 	rules: {
 		canDrop: () => true,
 		canDrag: () => true,
@@ -27,4 +32,5 @@ Container.craft = {
 		canMoveOut: () => true,
 	},
 	isCanvas: true,
+	related: { settings: GridSettings },
 };
