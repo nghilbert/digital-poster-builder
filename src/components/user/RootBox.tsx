@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from "react";
+import { type PropsWithChildren } from "react";
 import { useNode } from "@craftjs/core";
 import { Box as MUIBox } from "@mui/material";
 

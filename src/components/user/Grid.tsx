@@ -1,6 +1,6 @@
 import { useNode } from "@craftjs/core";
 import { Grid as MUIGrid } from "@mui/material";
-import type { PropsWithChildren } from "react";
+import { type PropsWithChildren } from "react";
 
 export function Grid({ children }: PropsWithChildren) {
 	const {
