@@ -20,7 +20,6 @@ export function Container({ children }: PropsWithChildren) {
 
 Container.craft = {
 	displayName: "Container",
-	props: { children: [] },
 	rules: {
 		canDrop: () => true,
 		canDrag: () => true,

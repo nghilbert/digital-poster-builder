@@ -1,7 +1,9 @@
-import { Container } from "./Container";
 import { RootBox } from "./RootBox";
+import { Container } from "./Container";
+import { Stack } from "./Stack";
 
 export const userComponents = {
-	Container,
 	RootBox,
+	Container,
+	Stack,
 };

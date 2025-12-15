@@ -4,7 +4,7 @@ import { Element, Frame } from "@craftjs/core";
 import { Paper } from "@mui/material";
 import { userComponents } from "components/user";
 
-export function BuilderCanvas() {
+export function ResizableCanvas() {
 	const { RootBox } = userComponents;
 
 	return (
@@ -12,9 +12,12 @@ export function BuilderCanvas() {
 			width={1024}
 			height={600}
 			minConstraints={[320, 400]}
-			maxConstraints={[1200, 1200]}
-			resizeHandles={["se", "e", "s", "sw", "w"]}
+			resizeHandles={["s", "sw", "w"]}
 			handleSize={[20, 20]}
+			style={{
+				maxWidth: "100%",
+				maxHeight: "100%",
+			}}
 		>
 			<Paper
 				elevation={3}
