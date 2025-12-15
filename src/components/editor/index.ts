@@ -1,5 +1,4 @@
-export * from "./ResizableCanvas";
+export * from "./CanvasArea";
 export * from "./SidePanel";
 export * from "./ComponentsMenu";
 export * from "./EditorMenu";
-export * from "./EditorHighlighter";
