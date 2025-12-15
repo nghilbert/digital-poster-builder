@@ -22,7 +22,7 @@ export function ResizableCanvas() {
 			<Paper
 				elevation={3}
 				sx={{
-					p: 1,
+					p: 2,
 					width: "100%",
 					height: "100%",
 					position: "relative",
