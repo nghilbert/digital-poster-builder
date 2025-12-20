@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"paths": { "components/*": ["./src/components/*"] },
+		"paths": { "components/*": ["./src/components/*"], "pages/*": ["./src/pages/*"], "api/*": ["./src/api/*"] },
 		"tsBuildInfoFile": "./node_modules/.tmp/tsconfig.tsbuildinfo",
 		"target": "ES2023",
 		"useDefineForClassFields": true,

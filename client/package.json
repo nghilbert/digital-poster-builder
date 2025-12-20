@@ -7,7 +7,8 @@
 		"dev": "vite",
 		"build": "tsc -b && vite build",
 		"lint": "eslint .",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"generate:api": "npx openapi-typescript http://localhost:8000/openapi.json -o src/api/types.ts"
 	},
 	"dependencies": {
 		"@craftjs/core": "^0.2.12",
@@ -16,7 +17,6 @@
 		"@emotion/styled": "^11.14.1",
 		"@mui/icons-material": "^7.3.6",
 		"@mui/material": "^7.3.6",
-		"leva": "^0.10.1",
 		"react": "^19.2.0",
 		"react-dom": "^19.2.0",
 		"react-resizable": "^3.0.5",
@@ -33,6 +33,7 @@
 		"eslint-plugin-react-hooks": "^7.0.1",
 		"eslint-plugin-react-refresh": "^0.4.24",
 		"globals": "^16.5.0",
+		"openapi-typescript": "^7.10.1",
 		"typescript": "~5.9.3",
 		"typescript-eslint": "^8.46.4",
 		"vite": "^7.2.4",

@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import { Home, LayoutEditor, LayoutList } from "pages";
 import { ThemeProvider, CssBaseline, useMediaQuery } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { getDesignTokens } from "./theme";
@@ -14,7 +14,10 @@ export default function App() {
 			<CssBaseline />
 			<BrowserRouter>
 				<Routes>
-					<Route index element={<Home />} />
+					<Route path="/" element={<Home />} />
+					<Route path="/layouts" element={<LayoutList />} />
+					<Route path="/layouts/new" element={<LayoutEditor />} />
+					<Route path="/layouts/:id" element={<LayoutEditor />} />{" "}
 				</Routes>
 			</BrowserRouter>
 		</ThemeProvider>

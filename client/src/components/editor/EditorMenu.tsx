@@ -3,7 +3,7 @@ import { useEditor } from "@craftjs/core";
 import { Layers } from "@craftjs/layers";
 import { IconButton, Toolbar, Divider, Stack, Tooltip } from "@mui/material";
 import { DeleteForever, Save, Undo, Redo } from "@mui/icons-material";
-
+import { updateLayout } from "api/layouts";
 const EmptySettings = () => null;
 
 export function EditorMenu() {
@@ -12,7 +12,7 @@ export function EditorMenu() {
 		selectedNodeIds: Array.from(state.events.selected),
 		canUndo: query.history.canUndo(),
 		canRedo: query.history.canRedo(),
-		nodeData: query.serialize(),
+		nodeData: query.getSerializedNodes(),
 		queryNode: query.node,
 	}));
 
@@ -25,12 +25,16 @@ export function EditorMenu() {
 	const [savedNodeData, setSavedNodeData] = useState(nodeData);
 	const isSaveNeeded = savedNodeData !== nodeData;
 
-	function saveLayout() {
-		console.log("New node data: ", nodeData);
+	async function handleSave() {
+		await updateLayout(layoutId, {
+			name: "Current Layout",
+			node_data: nodeData,
+		});
+
 		setSavedNodeData(nodeData);
 	}
 
-	function deleteSelectedNodes() {
+	function handleDelete() {
 		selectedNodeIds.forEach((id) => {
 			if (queryNode(id).isDeletable()) actions.delete(id);
 		});
@@ -40,7 +44,7 @@ export function EditorMenu() {
 		<Stack sx={{ textAlign: "center" }}>
 			<Toolbar variant="dense" disableGutters>
 				<Tooltip title="Save Layout">
-					<IconButton disabled={!isSaveNeeded} onClick={saveLayout}>
+					<IconButton disabled={!isSaveNeeded} onClick={handleSave}>
 						<Save />
 					</IconButton>
 				</Tooltip>
@@ -55,7 +59,7 @@ export function EditorMenu() {
 					</IconButton>
 				</Tooltip>
 				<Tooltip title="Delete All Selected Components">
-					<IconButton color="error" disabled={selectedNodeIds.length < 1} onClick={deleteSelectedNodes}>
+					<IconButton color="error" disabled={selectedNodeIds.length < 1} onClick={handleDelete}>
 						<DeleteForever />
 					</IconButton>
 				</Tooltip>
