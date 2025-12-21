@@ -14,5 +14,9 @@ export async function request<T>(path: string, options: RequestInit = {}): Promi
 		throw new Error(text || res.statusText);
 	}
 
+	if (res.status === 204) {
+		return undefined as T;
+	}
+
 	return res.json();
 }

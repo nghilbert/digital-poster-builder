@@ -4,11 +4,9 @@ export const getDesignTokens = (mode: "light" | "dark") => ({
 		//...
 	},
 	typography: {
-		mode,
 		//...
 	},
 	components: {
-		mode,
 		//...
 	},
 });

@@ -1,8 +1,8 @@
-import "react-resizable/css/styles.css";
+import { useEditor } from "@craftjs/core";
+import { Paper } from "@mui/material";
 import { type PropsWithChildren, useState } from "react";
 import { ResizableBox } from "react-resizable";
-import { Paper } from "@mui/material";
-import { useEditor } from "@craftjs/core";
+import "react-resizable/css/styles.css";
 
 export function CanvasArea({ children }: PropsWithChildren) {
 	const { selectedId, hoveredId, queryNode } = useEditor((state, query) => ({
@@ -55,7 +55,7 @@ export function CanvasArea({ children }: PropsWithChildren) {
 							left: selectedRect.left,
 							width: selectedRect.width,
 							height: selectedRect.height,
-							outline: "2px solid #ff9800",
+							outline: "1px solid #ff9800",
 							pointerEvents: "none",
 						}}
 					/>

@@ -1,7 +1,7 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Home, LayoutEditor, LayoutList } from "pages";
-import { ThemeProvider, CssBaseline, useMediaQuery } from "@mui/material";
+import { CssBaseline, ThemeProvider, useMediaQuery } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./router";
 import { getDesignTokens } from "./theme";
 
 export default function App() {
@@ -12,14 +12,7 @@ export default function App() {
 	return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
-			<BrowserRouter>
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/layouts" element={<LayoutList />} />
-					<Route path="/layouts/new" element={<LayoutEditor />} />
-					<Route path="/layouts/:id" element={<LayoutEditor />} />{" "}
-				</Routes>
-			</BrowserRouter>
+			<RouterProvider router={router} />
 		</ThemeProvider>
 	);
 }

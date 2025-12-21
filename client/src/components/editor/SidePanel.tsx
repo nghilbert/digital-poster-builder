@@ -1,18 +1,16 @@
-import { Box, Paper, Divider } from "@mui/material";
-import { ComponentsMenu, EditorMenu } from "components/editor";
+import { Box, Divider, Paper, Stack } from "@mui/material";
+import { Children, type PropsWithChildren } from "react";
 
-export function SidePanel() {
+export function SidePanel({ children }: PropsWithChildren) {
 	return (
-		<Paper elevation={3} sx={{ width: 360, height: "100%", display: "flex", flexDirection: "column" }}>
-			<Box sx={{ resize: "vertical" }} p={1} overflow="auto" minHeight="25%" height="50%" maxHeight="75%">
-				<EditorMenu />
-			</Box>
-
-			<Divider />
-
-			<Box p={1} flex={1} overflow="auto">
-				<ComponentsMenu />
-			</Box>
+		<Paper elevation={3} sx={{ minWidth: 360, height: "100%" }}>
+			<Stack height="100%" divider={<Divider flexItem />}>
+				{Children.map(children, (child) => (
+					<Box flex={1} overflow="auto">
+						{child}
+					</Box>
+				))}
+			</Stack>
 		</Paper>
 	);
 }

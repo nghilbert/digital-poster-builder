@@ -1,4 +1,5 @@
 export * from "./CanvasArea";
-export * from "./SidePanel";
+export * from "./ComponentSettingsMenu";
 export * from "./ComponentsMenu";
-export * from "./EditorMenu";
+export * from "./EditorToolbar";
+export * from "./SidePanel";

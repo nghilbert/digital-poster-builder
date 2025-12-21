@@ -1,6 +1,7 @@
 import { useNode } from "@craftjs/core";
 import { Grid as MUIGrid } from "@mui/material";
 import { type PropsWithChildren } from "react";
+import GridViewIcon from "@mui/icons-material/GridView";
 
 export function Grid({ children }: PropsWithChildren) {
 	const {
@@ -25,6 +26,7 @@ function GridSettings() {
 
 Grid.craft = {
 	displayName: "Grid",
+	icon: GridViewIcon,
 	rules: {
 		canDrop: () => true,
 		canDrag: () => true,

@@ -4,7 +4,7 @@
  */
 
 export interface paths {
-    "/layouts/": {
+    "/layouts": {
         parameters: {
             query?: never;
             header?: never;
@@ -12,10 +12,10 @@ export interface paths {
             cookie?: never;
         };
         /** List Layouts */
-        get: operations["list_layouts_layouts__get"];
+        get: operations["list_layouts_layouts_get"];
         put?: never;
         /** Create Layout */
-        post: operations["create_layout_layouts__post"];
+        post: operations["create_layout_layouts_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -33,10 +33,12 @@ export interface paths {
         get: operations["get_layout_layouts__layout_id__get"];
         put?: never;
         post?: never;
-        delete?: never;
+        /** Delete Layout */
+        delete: operations["delete_layout_layouts__layout_id__delete"];
         options?: never;
         head?: never;
-        patch?: never;
+        /** Update Layout */
+        patch: operations["update_layout_layouts__layout_id__patch"];
         trace?: never;
     };
 }
@@ -52,24 +54,20 @@ export interface components {
         LayoutCreate: {
             /** Name */
             name: string;
-            /** Node Data */
-            node_data: {
-                [key: string]: unknown;
-            };
+            /** Content */
+            content?: string | null;
         };
         /** LayoutRead */
         LayoutRead: {
-            /** Name */
-            name: string;
-            /** Node Data */
-            node_data: {
-                [key: string]: unknown;
-            };
             /**
              * Id
              * Format: uuid
              */
             id: string;
+            /** Name */
+            name: string;
+            /** Content */
+            content: string | null;
             /**
              * Created At
              * Format: date-time
@@ -80,6 +78,13 @@ export interface components {
              * Format: date-time
              */
             updated_at: string;
+        };
+        /** LayoutUpdate */
+        LayoutUpdate: {
+            /** Name */
+            name?: string | null;
+            /** Content */
+            content?: string | null;
         };
         /** ValidationError */
         ValidationError: {
@@ -99,7 +104,7 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    list_layouts_layouts__get: {
+    list_layouts_layouts_get: {
         parameters: {
             query?: never;
             header?: never;
@@ -119,7 +124,7 @@ export interface operations {
             };
         };
     };
-    create_layout_layouts__post: {
+    create_layout_layouts_post: {
         parameters: {
             query?: never;
             header?: never;
@@ -162,6 +167,70 @@ export interface operations {
             cookie?: never;
         };
         requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LayoutRead"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    delete_layout_layouts__layout_id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                layout_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_layout_layouts__layout_id__patch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                layout_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LayoutUpdate"];
+            };
+        };
         responses: {
             /** @description Successful Response */
             200: {

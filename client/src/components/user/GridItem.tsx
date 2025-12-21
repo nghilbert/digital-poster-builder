@@ -1,6 +1,7 @@
 import { useNode } from "@craftjs/core";
 import { Grid as MUIGrid } from "@mui/material";
 import { type PropsWithChildren } from "react";
+import ViewModuleIcon from "@mui/icons-material/ViewModule";
 
 type GridItemProps = {
 	size: number;
@@ -29,6 +30,7 @@ function GridSettings() {
 
 GridItem.craft = {
 	displayName: "Grid Item",
+	icon: ViewModuleIcon,
 	rules: {
 		canDrop: () => true,
 		canDrag: () => true,
