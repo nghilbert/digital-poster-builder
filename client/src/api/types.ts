@@ -12,10 +12,10 @@ export interface paths {
             cookie?: never;
         };
         /** List Layouts */
-        get: operations["list_layouts_layouts_get"];
+        get: operations["core_routes_layouts_list_layouts"];
         put?: never;
         /** Create Layout */
-        post: operations["create_layout_layouts_post"];
+        post: operations["core_routes_layouts_create_layout"];
         delete?: never;
         options?: never;
         head?: never;
@@ -30,33 +30,21 @@ export interface paths {
             cookie?: never;
         };
         /** Get Layout */
-        get: operations["get_layout_layouts__layout_id__get"];
+        get: operations["core_routes_layouts_get_layout"];
         put?: never;
         post?: never;
         /** Delete Layout */
-        delete: operations["delete_layout_layouts__layout_id__delete"];
+        delete: operations["core_routes_layouts_delete_layout"];
         options?: never;
         head?: never;
         /** Update Layout */
-        patch: operations["update_layout_layouts__layout_id__patch"];
+        patch: operations["core_routes_layouts_update_layout"];
         trace?: never;
     };
 }
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
-        /** HTTPValidationError */
-        HTTPValidationError: {
-            /** Detail */
-            detail?: components["schemas"]["ValidationError"][];
-        };
-        /** LayoutCreate */
-        LayoutCreate: {
-            /** Name */
-            name: string;
-            /** Content */
-            content?: string | null;
-        };
         /** LayoutRead */
         LayoutRead: {
             /**
@@ -67,17 +55,19 @@ export interface components {
             /** Name */
             name: string;
             /** Content */
-            content: string | null;
+            content?: string | null;
             /**
              * Created At
              * Format: date-time
              */
             created_at: string;
-            /**
-             * Updated At
-             * Format: date-time
-             */
-            updated_at: string;
+        };
+        /** LayoutCreate */
+        LayoutCreate: {
+            /** Name */
+            name: string;
+            /** Content */
+            content?: string | null;
         };
         /** LayoutUpdate */
         LayoutUpdate: {
@@ -85,15 +75,6 @@ export interface components {
             name?: string | null;
             /** Content */
             content?: string | null;
-        };
-        /** ValidationError */
-        ValidationError: {
-            /** Location */
-            loc: (string | number)[];
-            /** Message */
-            msg: string;
-            /** Error Type */
-            type: string;
         };
     };
     responses: never;
@@ -104,7 +85,7 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    list_layouts_layouts_get: {
+    core_routes_layouts_list_layouts: {
         parameters: {
             query?: never;
             header?: never;
@@ -113,7 +94,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description Successful Response */
+            /** @description OK */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -124,7 +105,7 @@ export interface operations {
             };
         };
     };
-    create_layout_layouts_post: {
+    core_routes_layouts_create_layout: {
         parameters: {
             query?: never;
             header?: never;
@@ -137,7 +118,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description Successful Response */
+            /** @description OK */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -146,18 +127,9 @@ export interface operations {
                     "application/json": components["schemas"]["LayoutRead"];
                 };
             };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
         };
     };
-    get_layout_layouts__layout_id__get: {
+    core_routes_layouts_get_layout: {
         parameters: {
             query?: never;
             header?: never;
@@ -168,7 +140,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description Successful Response */
+            /** @description OK */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -177,18 +149,9 @@ export interface operations {
                     "application/json": components["schemas"]["LayoutRead"];
                 };
             };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
         };
     };
-    delete_layout_layouts__layout_id__delete: {
+    core_routes_layouts_delete_layout: {
         parameters: {
             query?: never;
             header?: never;
@@ -199,25 +162,16 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description Successful Response */
+            /** @description No Content */
             204: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content?: never;
             };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
         };
     };
-    update_layout_layouts__layout_id__patch: {
+    core_routes_layouts_update_layout: {
         parameters: {
             query?: never;
             header?: never;
@@ -232,22 +186,13 @@ export interface operations {
             };
         };
         responses: {
-            /** @description Successful Response */
+            /** @description OK */
             200: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
                     "application/json": components["schemas"]["LayoutRead"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
         };
