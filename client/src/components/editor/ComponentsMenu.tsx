@@ -23,6 +23,7 @@ export function ComponentsMenu() {
 
 				return (
 					<Button
+						key={key}
 						startIcon={<Icon />}
 						fullWidth
 						sx={{ cursor: "grab" }}

@@ -8,16 +8,16 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 export function LayoutEditor() {
-	const { id } = useParams();
+	const { layoutId } = useParams();
 	const [layoutContent, setLayoutContent] = useState<string | null>(null);
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		if (!id) return;
+		if (!layoutId) return;
 
 		// If an error is caught during the api call, isLoading will always be true
 		// This prevents a frame from ever being loaded and overwriting data
-		getLayout(id)
+		getLayout(layoutId)
 			.then((layout) => {
 				if (layout.content) {
 					setLayoutContent(layout.content);
@@ -25,7 +25,7 @@ export function LayoutEditor() {
 				setIsLoading(false);
 			})
 			.catch(console.error);
-	}, [id]);
+	}, [layoutId]);
 
 	return (
 		<Editor resolver={{ ...userComponents }}>

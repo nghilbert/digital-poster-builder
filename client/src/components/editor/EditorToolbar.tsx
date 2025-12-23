@@ -2,48 +2,43 @@ import { useEditor } from "@craftjs/core";
 import { DeleteForever, Redo, Save, Undo } from "@mui/icons-material";
 import { IconButton, Toolbar, Tooltip } from "@mui/material";
 import { updateLayout } from "api/layouts";
-import { useState } from "react";
 import { useParams } from "react-router-dom";
-
 export function EditorToolbar() {
-	const { id } = useParams();
+	const { layoutId } = useParams();
 
 	// Variables update when the editor updates
-	const { actions, selectedNodeIds, canUndo, canRedo, serialized, queryNode } = useEditor((state, query) => ({
-		selectedNodeIds: Array.from(state.events.selected),
-		canUndo: query.history.canUndo(),
-		canRedo: query.history.canRedo(),
-		serialized: query.serialize(),
-		queryNode: query.node,
-	}));
+	const { actions, query, selectedId, isDeletable, canUndo, canRedo } = useEditor((state, query) => {
+		// Returns a set, only get thr last node that was selected or null
+		const selectedId = Array.from(state.events.selected).at(-1) ?? null;
 
-	// Determine whether save is needed
-	const [lastSaved, setLastSaved] = useState<string>();
-	const isSaveNeeded = lastSaved !== serialized;
+		return {
+			selectedId,
+			isDeletable: selectedId !== null && query.node(selectedId).isDeletable(),
+			canUndo: query.history.canUndo(),
+			canRedo: query.history.canRedo(),
+		};
+	});
 
 	function handleSave() {
-		if (!id) return;
-		updateLayout(id, {
+		if (!layoutId) return;
+		const serialized = query.serialize();
+
+		updateLayout(layoutId, {
 			name: "Current Layout",
 			content: serialized,
-		})
-			.then(() => {
-				setLastSaved(serialized);
-			})
-			.catch(console.error);
+		}).catch(console.error);
 	}
 
 	function handleDelete() {
-		selectedNodeIds.forEach((nodeId) => {
-			if (queryNode(nodeId).isDeletable()) actions.delete(nodeId);
-		});
+		if (!isDeletable || selectedId === null) return;
+		actions.delete(selectedId);
 	}
 
 	return (
 		<Toolbar>
 			<Tooltip title="Save Layout">
 				<span>
-					<IconButton disabled={!isSaveNeeded} onClick={handleSave}>
+					<IconButton disabled={!canUndo} onClick={handleSave}>
 						<Save />
 					</IconButton>
 				</span>
@@ -62,9 +57,9 @@ export function EditorToolbar() {
 					</IconButton>
 				</span>
 			</Tooltip>
-			<Tooltip title="Delete All Selected Components">
+			<Tooltip title="Delete Selected Component">
 				<span>
-					<IconButton color="error" disabled={selectedNodeIds.length < 1} onClick={handleDelete}>
+					<IconButton color="error" disabled={!isDeletable} onClick={handleDelete}>
 						<DeleteForever />
 					</IconButton>
 				</span>

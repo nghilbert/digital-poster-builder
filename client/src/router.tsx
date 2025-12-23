@@ -17,7 +17,7 @@ export const router = createBrowserRouter([
 				element: <LayoutList />,
 			},
 			{
-				path: "/layouts/:id",
+				path: "/layouts/:layoutId",
 				element: <LayoutEditor />,
 			},
 		],
