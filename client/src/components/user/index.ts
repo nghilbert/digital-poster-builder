@@ -1,3 +1,2 @@
-export * from "./RootBox";
 export * from "./Grid";
-export * from "./GridItem";
+export * from "./RootBox";

@@ -1,16 +1,22 @@
-import { useNode } from "@craftjs/core";
-import { Grid as MUIGrid } from "@mui/material";
+import { type Node, useNode } from "@craftjs/core";
+import ViewModuleIcon from "@mui/icons-material/ViewModule";
+import { FormControl, Grid as MUIGrid, ToggleButton } from "@mui/material";
 import { type PropsWithChildren } from "react";
-import GridViewIcon from "@mui/icons-material/GridView";
 
-export function Grid({ children }: PropsWithChildren) {
+type GridProps = {
+	container: boolean;
+	size: number;
+};
+
+export function Grid({ container, size, children }: PropsWithChildren<GridProps>) {
 	const {
 		connectors: { connect, drag },
 	} = useNode();
 
 	return (
 		<MUIGrid
-			container
+			container={container}
+			size={size}
 			ref={(ref: HTMLElement | null) => {
 				if (ref) connect(drag(ref));
 			}}
@@ -21,16 +27,39 @@ export function Grid({ children }: PropsWithChildren) {
 }
 
 function GridSettings() {
-	return null;
+	const {
+		actions: { setProp },
+		props,
+	} = useNode((node) => ({ props: node.data.props }));
+
+	return (
+		<FormControl>
+			<ToggleButton
+				value="container"
+				selected={props.container}
+				onChange={() =>
+					setProp((props: GridProps) => {
+						props.container = !props.container;
+					})
+				}
+			>
+				Container
+			</ToggleButton>
+		</FormControl>
+	);
 }
 
 Grid.craft = {
 	displayName: "Grid",
-	icon: GridViewIcon,
+	icon: ViewModuleIcon,
+	props: {
+		size: 1,
+		container: false,
+	},
 	rules: {
 		canDrop: () => true,
 		canDrag: () => true,
-		canMoveIn: () => true,
+		canMoveIn: (_incoming: Node[], self: Node) => self.data.props.container,
 		canMoveOut: () => true,
 	},
 	isCanvas: true,
